@@ -1,0 +1,37 @@
+# Define the root directory for storing artifacts
+artifacts_root: artifacts
+
+# Data Ingestion Section
+data_ingestion:
+  # Specify the root directory for data ingestion artifacts
+  root_dir: artifacts/data_ingestion
+
+  # Define the source URL from which the data will be downloaded
+  source_URL: https://drive.google.com/file/d/1W-li_tE2EIHWZSVc0DpBT7XKH2f-plT1/view?usp=drive_link
+
+  # Specify the local path where the downloaded data file will be stored
+  local_data_file: artifacts/data_ingestion/data.zip
+
+  # Specify the directory where the downloaded data will be unzipped
+  unzip_dir: artifacts/data_ingestion
+
+
+# Prepare Base Model Section
+prepare_base_model:
+  # Specify the root directory for preparing the base model artifacts
+  root_dir: artifacts/prepare_base_model
+
+  # Define the path to the original base model
+  base_model_path: artifacts/prepare_base_model/base_model.h5
+
+  # Define the path where the updated base model will be saved
+  updated_base_model_path: artifacts/prepare_base_model/base_model_updated.h5
+
+
+# Training Section
+training:
+  # Specify the root directory for training artifacts
+  root_dir: artifacts/training
+
+  # Define the path where the trained model will be saved
+  trained_model_path: artifacts/training/model.h5
