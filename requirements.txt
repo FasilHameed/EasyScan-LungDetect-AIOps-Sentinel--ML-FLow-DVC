@@ -1,59 +1,17 @@
-# File: requirements.txt
-# Purpose: Specify the dependencies required for a Python project. These dependencies will be installed using a package manager like pip.
-
-# TensorFlow version 2.12.0 for machine learning tasks.
-tensorflow==2.12.0
-
-# Pandas for data manipulation and analysis.
+tensorflow
 pandas 
-
-# gdown for downloading files from the internet.
-gdown
-
-# dvc (Data Version Control) for managing and versioning machine learning data.
 dvc
-
-# MLflow version 2.2.2 for managing the end-to-end machine learning lifecycle.
-mlflow==2.2.2
-
-# Jupyter Notebook for interactive computing.
 notebook
-
-# NumPy for numerical computing.
 numpy
-
-# Matplotlib for data visualization.
 matplotlib
-
-# Seaborn for statistical data visualization.
 seaborn
-
-# python-box for Python dictionaries with attribute-style access.
 python-box==6.0.2
-
-# pyYAML for YAML parsing.
 pyYAML
-
-# tqdm for displaying progress bars.
 tqdm
-
-# ensure for asserting conditions in code.
 ensure==1.0.2
-
-# Joblib for lightweight pipelining in Python.
 joblib
-
-# types-PyYAML for type hints related to pyYAML.
 types-PyYAML
-
-# SciPy for scientific and technical computing.
 scipy
-
-# Flask for building web applications.
 Flask
-
-# Flask-Cors for handling Cross-Origin Resource Sharing (CORS) in Flask applications.
 Flask-Cors
-
-# Install the project in editable mode (i.e., -e .) to allow code changes without reinstalling.
 -e .
