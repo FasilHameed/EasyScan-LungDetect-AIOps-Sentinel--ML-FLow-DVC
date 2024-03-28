@@ -1,0 +1,14 @@
+# Example params.yaml
+
+model:
+  name: "resnet50"
+  num_layers: 50
+  input_shape:
+    height: 224
+    width: 224
+    channels: 3
+
+training:
+  batch_size: 32
+  epochs: 10
+  learning_rate: 0.001
