@@ -10,7 +10,7 @@ with open("README.md", "r", encoding="utf-8") as f:
 __version__ = "0.0.0"
 REPO_NAME = "EasyScan-LungDetect-AIOps-Sentinel--ML-FLow-DVC"
 AUTHOR_USER_NAME = "FasilHameed"
-SRC_REPO = "EasyScan"
+SRC_REPO = "ChickenDisease"
 AUTHOR_EMAIL = "faisalhameed763@gmail.com"
 
 # Set up the project using setuptools
