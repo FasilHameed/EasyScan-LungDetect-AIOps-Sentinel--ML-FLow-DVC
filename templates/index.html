@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Fecal Disease Detection</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f8f9fa;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .container {
+            background-color: #fff;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            max-width: 600px;
+            width: 90%;
+            transition: all 0.3s ease;
+        }
+
+        h3 {
+            color: #1b2d6b;
+            font-size: 32px;
+            font-weight: 700;
+            margin-bottom: 20px;
+        }
+
+        #image-container {
+            position: relative;
+            width: 300px;
+            height: 300px;
+            margin: 0 auto 20px;
+            border: 4px solid #1b2d6b;
+            border-radius: 50%;
+            overflow: hidden;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+        }
+
+        #image-container img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .upload-btn, .predict-btn {
+            padding: 10px 20px;
+            margin: 10px;
+            background-color: #1b2d6b;
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .upload-btn:hover, .predict-btn:hover {
+            background-color: #0056b3;
+        }
+
+        #result-container {
+            border: 2px solid #1b2d6b;
+            height: 100px;
+            width: 100%;
+            padding: 20px;
+            margin-top: 20px;
+            overflow-y: auto;
+            text-align: center;
+            border-radius: 4px;
+            font-size: 18px;
+            color: #333;
+        }
+
+        .loading {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(255, 255, 255, 0.7);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+        }
+
+        .loader {
+            border: 8px solid #f3f3f3;
+            border-top: 8px solid #1b2d6b;
+            border-radius: 50%;
+            width: 60px;
+            height: 60px;
+            animation: spin 2s linear infinite;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h3>Fecal Disease Detection</h3>
+        <div id="image-container">
+            <img id="photo" src="https://img.freepik.com/free-vector/group-young-people-posing-photo_52683-18824.jpg?size=338&ext=jpg" alt="">
+        </div>
+        <input type="file" id="fileinput" style="display: none;">
+        <button class="upload-btn">Click here to upload</button>
+        <button class="predict-btn">Predict</button>
+        <div class="result-container" id="result-container"></div>
+    </div>
+
+    <div class="loading" id="loading">
+        <div class="loader"></div>
+    </div>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            $('.upload-btn').click(function() {
+                $('#fileinput').focus().trigger('click');
+            });
+
+            $('#fileinput').change(function() {
+                if (this.files && this.files[0]) {
+                    var reader = new FileReader();
+                    reader.onload = function(e) {
+                        var url = e.target.result;
+                        $('#photo').attr('src', url);
+                    };
+                    reader.readAsDataURL(this.files[0]);
+                }
+            });
+
+            $('.predict-btn').click(function() {
+                var base64Data = $('#photo').attr('src').split(',')[1];
+                $('#loading').show();
+                $.ajax({
+                    url: '../predict',
+                    type: 'POST',
+                    contentType: 'application/json',
+                    data: JSON.stringify({ image: base64Data }),
+                    success: function(response) {
+                        var result = response[0].image;
+                        var message = result === "Healthy" ? "The chicken is healthy." : "The chicken is affected by Coccidiosis.";
+                        $('#result-container').html('<p>' + message + '</p>');
+                        $('#loading').hide();
+                    },
+                    error: function(xhr, status, error) {
+                        console.error(xhr.responseText);
+                        $('#loading').hide();
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>
